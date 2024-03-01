@@ -1,7 +1,9 @@
-import 'package:flutter/cupertino.dart';
-import 'package:path/path.dart';
+import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
 
+import '../models/category/category_model.dart';
+import '../models/category/category_model_constants.dart';
 import '../models/task/task_model.dart';
 import '../models/task/task_model_constants.dart';
 
@@ -55,10 +57,19 @@ class LocalDatabase {
       ${TaskModelConstants.description} $textType,
       ${TaskModelConstants.deadline} $textType,
       ${TaskModelConstants.status} $textType,
-      ${TaskModelConstants.category} $textType,
+      ${TaskModelConstants.category} $intType,
       ${TaskModelConstants.priority} $intType
     )''');
+
+    await db.execute('''CREATE TABLE ${CategoryModelConstants.tableName} (
+      ${CategoryModelConstants.id} $idType,
+      ${CategoryModelConstants.name} $textType,
+      ${CategoryModelConstants.color} $textType,
+      ${CategoryModelConstants.iconPath} $textType
+    )''');
   }
+
+  //------------------TASKS--------------------------------------
 
   static Future<TaskModel> insertTask(TaskModel taskModel) async {
     debugPrint("INITIAL ID:${taskModel.id}");
@@ -124,5 +135,56 @@ class LocalDatabase {
       whereArgs: ["$query%"],
     );
     return json.map((e) => TaskModel.fromJson(e)).toList();
+  }
+
+//------------------CATEGORIES--------------------------------------
+
+  static Future<CategoryModel> insertCategory(
+      CategoryModel categoryModel) async {
+    debugPrint("INITIAL ID:${categoryModel.id}");
+    final db = await databaseInstance.database;
+    int savedCategoryID = await db.insert(
+        CategoryModelConstants.tableName, categoryModel.toJson());
+    debugPrint("SAVED ID:$savedCategoryID");
+    return categoryModel.copyWith(id: savedCategoryID);
+  }
+
+  static Future<List<CategoryModel>> getAllCategories() async {
+    final db = await databaseInstance.database;
+    String orderBy = "${CategoryModelConstants.id} DESC"; //"_id DESC"
+    List json =
+    await db.query(CategoryModelConstants.tableName, orderBy: orderBy);
+    return json.map((e) => CategoryModel.fromJson(e)).toList();
+  }
+
+  static Future<CategoryModel> getCategoryByName(String name) async {
+    final db = await databaseInstance.database;
+    String orderBy = "${CategoryModelConstants.id} DESC"; //"_id DESC"
+    List json = await db.query(
+      CategoryModelConstants.tableName,
+      orderBy: orderBy,
+      where: "${CategoryModelConstants.name} = ?",
+      whereArgs: [name],
+    );
+    return json.map((e) => CategoryModel.fromJson(e)).toList()[0];
+  }
+
+  static Future<CategoryModel> getCategoryById(int id) async {
+    final db = await databaseInstance.database;
+    String orderBy = "${CategoryModelConstants.id} DESC"; //"_id DESC"
+    List json = await db.query(
+      CategoryModelConstants.tableName,
+      orderBy: orderBy,
+      where: "${CategoryModelConstants.id} = ?",
+      whereArgs: [id],
+    );
+    return json.map((e) => CategoryModel.fromJson(e)).toList()[0];
+  }
+
+  void function() {
+    //000000 => Color(0xFF000000)
+    var color = Colors.black;
+    Color(int.parse("000000"));
+    color.value.toString();
   }
 }

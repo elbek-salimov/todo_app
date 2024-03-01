@@ -3,6 +3,8 @@ import 'package:todo_app/screens/home/home_screen.dart';
 import 'package:todo_app/screens/register/register_screen.dart';
 import 'package:todo_app/screens/start/start_screen.dart';
 
+import 'add_category/add_category_screen.dart';
+
 class AppRoutes {
   static Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -12,6 +14,12 @@ class AppRoutes {
         return navigate(const RegisterScreen());
       case RouteNames.home:
         return navigate(const HomeScreen());
+      case RouteNames.addCategory:
+        return navigate(
+          AddCategoryScreen(
+            onCategoryAdded: settings.arguments as VoidCallback?,
+          ),
+        );
       default:
         return navigate(
           const Scaffold(
@@ -29,7 +37,8 @@ class AppRoutes {
 }
 
 class RouteNames {
-  static const String start = "/start_route";
+  static const String start = "/";
   static const String register = "/register_route";
   static const String home = "/home_route";
+  static const String addCategory = "/add_category";
 }

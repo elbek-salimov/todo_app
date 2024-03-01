@@ -6,7 +6,7 @@ class AppImages {
   static String dailyPic = 'assets/icons/daily_pic.svg';
   static String doneAll = 'assets/icons/done_all.svg';
   static String edit = 'assets/icons/edit.svg';
-  static String health = 'assets/icons/health.svg';
+  static String workout = 'assets/icons/workout.svg';
   static String roundOne = 'assets/icons/round_one.svg';
   static String roundTwo = 'assets/icons/round_two.svg';
   static String roundThree = 'assets/icons/round_three.svg';
@@ -20,7 +20,12 @@ class AppImages {
   static String next = 'assets/icons/next.svg';
   static String school = 'assets/icons/school.svg';
   static String movie = 'assets/icons/movie.svg';
-  static String more = 'assets/icons/more.svg';
+  static String design = 'assets/icons/design.svg';
+  static String grocery = 'assets/icons/grocery.svg';
+  static String home = 'assets/icons/home.svg';
+  static String health = 'assets/icons/health.svg';
+  static String music = 'assets/icons/music.svg';
+  static String social = 'assets/icons/social.svg';
 
   // jpg
 

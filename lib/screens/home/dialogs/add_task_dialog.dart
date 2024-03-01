@@ -23,7 +23,7 @@ addTaskDialog({
   DateTime? dateTime;
   TimeOfDay? timeOfDay;
 
-  String category = "work";
+  int categoryId = 0;
   int priority = 1;
 
   final FocusNode focusNode1 = FocusNode();
@@ -243,14 +243,14 @@ addTaskDialog({
                       onPressed: () async {
                         showCategorySelectDialog(
                           context: context,
-                          categorySelection: (selectedCategory) {
+                          categorySelection: (selectedCategoryName) {
                             setState(() {
-                              category = selectedCategory;
+                              categoryId = categoryId;
                             });
                             taskModel =
-                                taskModel.copyWith(category: selectedCategory);
+                                taskModel.copyWith(categoryId: categoryId);
                           },
-                          category: category,
+                          categoryId: categoryId,
                         );
                       },
                       icon: SizedBox(

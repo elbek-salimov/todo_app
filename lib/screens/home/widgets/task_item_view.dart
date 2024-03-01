@@ -61,7 +61,7 @@ class TaskItemView extends StatelessWidget {
                   children: [
                     TextButton(
                       style: TextButton.styleFrom(
-                          backgroundColor: taskModel.status.name == "completed"
+                          backgroundColor: taskModel.status.name == 'completed'
                               ? AppColors.c646FD4
                               : AppColors.c2A8899,
                           shape: RoundedRectangleBorder(
@@ -94,20 +94,19 @@ class TaskItemView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    10.getW(),
                     Container(
                       height: 22.h,
                       padding:
                           EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
                       decoration: BoxDecoration(
                           color: AppColors.white,
-                          borderRadius: BorderRadius.circular(4),
+                          borderRadius: BorderRadius.circular(8),
                           border: Border.all(color: AppColors.c646FD4)),
                       child: Row(
                         children: [
                           Image.asset(AppImages.priority),
                           2.getW(),
-                          Text(taskModel.category.toString())
+                          Text(taskModel.categoryId.toString())
                         ],
                       ),
                     ),
