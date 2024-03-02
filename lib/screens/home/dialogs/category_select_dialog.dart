@@ -16,20 +16,36 @@ showCategorySelectDialog({
 }) async {
   int selectedCategoryId = categoryId;
 
-  // List<CategoryModel> categories = await LocalDatabase.getAllCategories();
   List<CategoryModel> categories = [
     CategoryModel(
-        iconPath: AppImages.school, name: 'School', color: AppColors.c2A8899),
+        id: -1,
+        iconPath: AppImages.school,
+        name: 'School',
+        color: AppColors.c2A8899),
     CategoryModel(
-        iconPath: AppImages.work, name: 'Work', color: AppColors.c5EB0D2),
+        id: -2,
+        iconPath: AppImages.work,
+        name: 'Work',
+        color: AppColors.c5EB0D2),
     CategoryModel(
-        iconPath: AppImages.book, name: 'Read', color: AppColors.c646FD4),
+        id: -3,
+        iconPath: AppImages.book,
+        name: 'Read',
+        color: AppColors.c646FD4),
     CategoryModel(
-        iconPath: AppImages.shopping, name: 'Shop', color: AppColors.cBE8972),
+        id: -4,
+        iconPath: AppImages.shopping,
+        name: 'Shop',
+        color: AppColors.cBE8972),
     CategoryModel(
-        iconPath: AppImages.workout, name: 'Work Out', color: AppColors.c83BC74)
+        id: -5,
+        iconPath: AppImages.workout,
+        name: 'Work Out',
+        color: AppColors.c83BC74)
   ];
-  // categories += await LocalDatabase.getAllCategories();
+
+  categories.addAll(await LocalDatabase.getAllCategories());
+
   if (!context.mounted) return;
   showDialog(
     context: context,
@@ -73,18 +89,20 @@ showCategorySelectDialog({
                                 ),
                               ),
                             ),
-                            onPressed: () {
+                            onPressed: () async {
                               Navigator.pushNamed(
                                   context, RouteNames.addCategory,
                                   arguments: () async {
-                                categories =
-                                    await LocalDatabase.getAllCategories();
+                                // categories =
+                                //     await LocalDatabase.getAllCategories();
+                                    categories.addAll(await LocalDatabase.getAllCategories());
                                 setState(() {});
                               });
                             },
-                            child: const Icon(
+                            child: Icon(
                               Icons.add,
-                              size: 50,
+                              // size: 50,
+                              weight: 50.h,
                               color: AppColors.cD25EB0,
                             ),
                           );
@@ -114,6 +132,8 @@ showCategorySelectDialog({
                                 5.getH(),
                                 Text(
                                   categories[index].name,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                   style: AppTextStyles.jostRegular.copyWith(
                                       fontSize: 14, color: AppColors.white),
                                 ),

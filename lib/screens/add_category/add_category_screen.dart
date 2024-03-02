@@ -61,7 +61,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
             20.getH(),
             Center(
               child: Container(
-                padding: EdgeInsets.only(top: 8.h),
+                padding: EdgeInsets.only(top: 8.h, left: 8.w, right: 8.w),
                 height: 80.w,
                 width: 80.w,
                 decoration: BoxDecoration(
